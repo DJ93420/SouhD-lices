@@ -3,35 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code pour Souh-Délices</title>
+    <title>Mes Profils Sociaux</title>
     <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Lucida Calligraphy', cursive, Arial, sans-serif;
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
+            background: url('images/DécoQRocde.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #333;
+            overflow: hidden;
+            filter: brightness(70%) contrast(120%);
         }
-        .qr-container {
-            text-align: center;
-            background: white;
+
+        .scrolling-text-container {
+            position: absolute;
+            top: 30mm;
+            left: 0;
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .scrolling-text {
+            white-space: nowrap;
+            color: #333;
+            font-size: 120px;
+            font-family: 'Lucida Calligraphy', cursive, Arial, sans-serif;
+            animation: scroll 10s linear infinite;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            line-height: 160px;
         }
-        .qr-container img {
-            border: 1px solid #ccc;
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .blinking-text {
+            animation: blink 1s step-start infinite;
+            color: #ff0000;
+            font-size: 36px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Augmente la transparence */
             border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            animation: blink 1s step-start infinite;
+            color: #ff0000;
+        }
+
+        .links {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .links li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0); /* Fond transparent pour les éléments de liste */
+            padding: 10px;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .links a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #007bff;
+            transition: transform 0.3s ease;
+        }
+
+        .links a:hover {
+            transform: scale(1.1);
+        }
+
+        .links img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease;
+            animation: rotate 2s linear infinite;
+        }
+
+        .links img.tiktok {
+            width: 180px;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .links span {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.8); /* Augmente la transparence */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .like-message {
+            margin-top: 20px;
+            font-size: 48px;
+            color: #ff0000;
+            animation: blink 1s step-start infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .like-message .heart {
+            color: #ff0000;
+            font-size: 64px;
+            margin-left: 10px;
+        }
+
+        .emoji {
+            position: absolute;
+            animation: fall linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        .emoji.macarons { font-size: 30px; }
+        .emoji.gateau { font-size: 40px; }
+
+        .emoji:nth-child(1) {
+            left: 10%;
+            animation-duration: 5s;
+            animation-delay: 0s;
+        }
+
+        .emoji:nth-child(2) {
+            left: 25%;
+            animation-duration: 7s;
+            animation-delay: 1s;
+        }
+
+        .emoji:nth-child(3) {
+            left: 40%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+
+        .emoji:nth-child(4) {
+            left: 55%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+
+        .emoji:nth-child(5) {
+            left: 70%;
+            animation-duration: 5s;
+            animation-delay: 4s;
+        }
+
+        .emoji:nth-child(6) {
+            left: 85%;
+            animation-duration: 7s;
+            animation-delay: 5s;
+        }
+
+        @media (max-width: 600px) {
+            .scrolling-text {
+                font-size: 60px;
+                line-height: 80px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .links {
+                gap: 10px;
+            }
+
+            .links img {
+                width: 50px;
+            }
+
+            .instructions {
+                font-size: 18px;
+            }
+
+            .like-message {
+                font-size: 36px;
+            }
+
+            .like-message .heart {
+                font-size: 48px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="qr-container">
-        <h1>Scannez ce QR Code</h1>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://dj93420.github.io/SouhD-lices/pr%C3%A9sentation.html" alt="QR Code">
-        <p>Pour accéder à la page : <a href="https://dj93420.github.io/SouhD-lices/pr%C3%A9sentation.html" target="_blank">Cliquez ici</a></p>
+    <!-- Pluie d'émojis -->
+    <div class="emoji macarons">🧁</div>
+    <div class="emoji macarons">🧁</div>
+    <div class="emoji macarons">🧁</div>
+    <div class="emoji gateau">🎂</div>
+    <div class="emoji gateau">🎂</div>
+    <div class="emoji gateau">🎂</div>
+
+    <!-- Conteneur pour l'animation -->
+    <div class="scrolling-text-container">
+        <div class="scrolling-text">Souh-Délices</div>
+    </div>
+
+    <div class="container">
+        <h1 class="blinking-text">Suivez-moi sur les réseaux sociaux</h1>
+        <ul class="links">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=61552745451612" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/souh.delices_traiteurs_patiss?igsh=bXpuM3o0anc1OGE0" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.tiktok.com/@souhdelicespatisserie?_t=8oSqanOBBGD&_r=1" target="_blank">
+                    <img class="tiktok" src="https://upload.wikimedia.org/wikipedia/fr/7/7f/TikTok_Logo.svg" alt="TikTok Logo">
+                </a>
+            </li>
+        </ul>
+        <div class="instructions">Cliquez sur le logo pour accéder à la page</div>
+        <div class="like-message">
+            N'oubliez pas de liker <span class="heart">❤️</span>
+        </div>
     </div>
 </body>
 </html>
